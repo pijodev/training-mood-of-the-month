@@ -39,5 +39,4 @@ public class Employee {
         this.birthdate = dateBirth;
         this.created_at = java.time.LocalDate.now();
     }
-
 }
