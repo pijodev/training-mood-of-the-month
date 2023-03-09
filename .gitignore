@@ -34,7 +34,7 @@
 # IntelliJ
 **/out/
 out/
-WelcomePool/wildfly*
+WelcomePool/wildfly-26.1.3.Final/*
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
