@@ -17,6 +17,24 @@ import javax.persistence.Id;
 @Entity
 public class MOTM_Answer {
 
+    public enum Grade {
+        A(5.0),
+        B(4.0),
+        C(3.0),
+        D(2.0),
+        E(1.0);
+
+        private double value;
+
+        Grade(double value) {
+            this.value = value;
+        }
+
+        public double getValue() {
+            return value;
+        }
+    }
+
     /*@Column(name="uuid", unique = true, nullable = false)
     @GeneratedValue
     @Id
@@ -24,7 +42,7 @@ public class MOTM_Answer {
     @Column(name="message", nullable = false)
     private String message;
     @Column(name="grade", nullable = false)
-    private int grade;
+    private Grade grade;
     @Column(name="Employee_id", nullable = false)
     private Integer Employee_id;
     @Column(name="MOTM_id", nullable = false)
