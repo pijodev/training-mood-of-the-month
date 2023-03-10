@@ -158,4 +158,24 @@ public class MotmDAO{
         return motmList;
     }
 
+    public MOTM getLastMotm() {
+
+        try {
+            InitialContext ctx = new InitialContext();
+            DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/PostgresDS");
+            Connection connection = dataSource.getConnection();
+            System.out.println("Connected");
+            String sqlQuery = "SELECT * FROM motm ORDER BY created_at DESC LIMIT 1";
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sqlQuery);
+            result.next();
+            MOTM motm = new MOTM(result.getString("uuid"), result.getString("title"), result.getString("message_template"), result.getString("page_template"), result.getDate("created_at").toLocalDate(), result.getDate("updated_at").toLocalDate());
+            connection.close();
+            System.out.println("Connection closed");
+            return motm;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
