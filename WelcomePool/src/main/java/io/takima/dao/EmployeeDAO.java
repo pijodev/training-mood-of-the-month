@@ -166,4 +166,26 @@ public class EmployeeDAO {
 
         return employeeList;
     }
+
+    public void deleteEmployee(String id) {
+        try {
+            InitialContext ctx = new InitialContext();
+            DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/PostgresDS");
+            Connection connection = dataSource.getConnection();
+            System.out.println("Connected");
+            String sql = "DELETE FROM employee WHERE uuid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            Date date = java.sql.Date.valueOf(java.time.LocalDate.now());
+            statement.setString(1, id);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 0) {
+                throw new SQLException("Failed to delete employee with ID: " + id);
+            }
+            statement.close();
+            connection.close();
+            System.out.println("Connection closed");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

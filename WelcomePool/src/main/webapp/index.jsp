@@ -164,7 +164,7 @@
                                             <td><%=employee.getBirthdate()%></td>
                                             <td class="text-right">
                                                 <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i> Edit</a>
-                                                <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Remove</a>
+                                                <a href="deleteMember?id=<%=employee.getUuid()%>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Remove</a>
                                             </td>
                                         </tr>
                                         <%}%>

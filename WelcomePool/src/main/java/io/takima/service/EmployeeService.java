@@ -32,4 +32,7 @@ public class EmployeeService {
         return listEmployees;
     }
 
+    public void deleteEmployee(String id) {
+        employeeDAO.deleteEmployee(id);
+    }
 }
