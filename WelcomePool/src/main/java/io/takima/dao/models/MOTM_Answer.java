@@ -56,7 +56,7 @@ public class MOTM_Answer {
     private LocalDate created_at;
     private LocalDate updated_at;
 
-    public MOTM_Answer(String message, Grade grade, String Employee_id, String MOTM_id) {
+    public MOTM_Answer(String message, Grade grade, String Employee_id, String MOTM_id, LocalDate created_at, LocalDate updated_at) {
         this.uuid = UUID.randomUUID().toString();
         this.message = message;
         this.grade = grade;
@@ -66,4 +66,9 @@ public class MOTM_Answer {
         this.updated_at = java.time.LocalDate.now();
     }
 
+    public MOTM_Answer() {
+        this.uuid = UUID.randomUUID().toString();
+        this.created_at = java.time.LocalDate.now();
+        this.updated_at = java.time.LocalDate.now();
+    }
 }
