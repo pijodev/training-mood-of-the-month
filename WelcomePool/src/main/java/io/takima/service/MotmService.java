@@ -8,6 +8,15 @@ import java.util.ArrayList;
 public class MotmService {
 
     MotmDAO motmDAO = new MotmDAO();
+
+    public MOTM getLastMotm() {
+        return motmDAO.getLastMotm();
+    }
+    public ArrayList<MOTM> getAllMotm(String title) {
+        ArrayList<MOTM> motmList = motmDAO.getAllMotm();
+
+        return motmList;
+    }
     public void insertMotm(MOTM m) {
         motmDAO.insertMotm(m);
     }
@@ -32,5 +41,4 @@ public class MotmService {
 
         return motmList;
     }
-
 }

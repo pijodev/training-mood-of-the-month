@@ -83,7 +83,7 @@
 
         <div class="comments">
             <h2 class="title">Comments</h2>
-            <div style="max-height:515px;overflow-y:scroll;">
+            <div style="max-height:515px; overflow-y:auto;">
             <% ArrayList<MOTM_Answer> motmAnswers = (ArrayList<MOTM_Answer>)request.getAttribute("MotmAnswers");%>
             <% for (MOTM_Answer motmAnswer : motmAnswers) {%>
             <div class="comment-container">

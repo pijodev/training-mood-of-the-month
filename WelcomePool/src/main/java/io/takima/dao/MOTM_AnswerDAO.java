@@ -3,12 +3,17 @@ package io.takima.dao;
 import io.takima.DbConfig;
 import io.takima.dao.models.MOTM_Answer;
 
+import javax.annotation.Resource;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MOTM_AnswerDAO {
 
+    @Resource(name = "PostgresDS")
     private Connection connection;
     public MOTM_AnswerDAO() {
     }
@@ -125,6 +130,33 @@ public class MOTM_AnswerDAO {
             System.out.println("Connection closed");
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return motmAnswerList;
+    }
+
+    public ArrayList<MOTM_Answer> getMotmAnswersByMotmId(String motmId) {
+
+        ArrayList<MOTM_Answer> motmAnswerList = new ArrayList<>();
+        try {
+            InitialContext ctx = new InitialContext();
+            DataSource dataSource = (DataSource) ctx.lookup("java:jboss/datasources/PostgresDS");
+            Connection connection = dataSource.getConnection();
+            System.out.println("Connected");
+            String sqlQuery = "SELECT * FROM motm_answer WHERE motm_id = '" + motmId + "'";
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sqlQuery);
+            while (result.next()){
+                MOTM_Answer motm = new MOTM_Answer(result.getString("uuid"), result.getString("message"), MOTM_Answer.Grade.fromValue((double) result.getInt("grade")), result.getString("Employee_id"), result.getString("MOTM_id"), result.getDate("created_at").toLocalDate(), result.getDate("updated_at").toLocalDate());
+                motmAnswerList.add(motm);
+
+                System.out.println(motmAnswerList);
+            }
+            connection.close();
+            System.out.println("Connection closed");
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

@@ -31,8 +31,8 @@ public class MOTM_AnswerService {
         return motmAnswerList;
     }
 
-    public ArrayList<MOTM_Answer> getMotmAnswers() {
+    public ArrayList<MOTM_Answer> getMotmAnswersByMotmId(String motmId) {
 
-        return new ArrayList<>(Arrays.asList(new MOTM_Answer("hello", MOTM_Answer.Grade.C, "1", "1")));
+        return motm_AnswerDAO.getMotmAnswersByMotmId(motmId);
     }
 }
